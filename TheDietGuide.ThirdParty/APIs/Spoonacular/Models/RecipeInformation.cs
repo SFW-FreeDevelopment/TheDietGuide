@@ -206,10 +206,10 @@ public class AnalyzedInstruction
     public class Measures
     {
         [JsonPropertyName("us")]
-        public Us Us { get; set; }
+        public RecipeUs Us { get; set; }
 
         [JsonPropertyName("metric")]
-        public Metric Metric { get; set; }
+        public RecipeMetric Metric { get; set; }
     }
 
     public class RecipeMetric
