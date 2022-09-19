@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheDietGuide.Web", "TheDiet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheDietGuide.Database", "TheDietGuide.Database\TheDietGuide.Database.csproj", "{798A429E-69FD-4E69-B37B-AC37F7215FF6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheDietGuide.ThirdParty", "TheDietGuide.ThirdParty\TheDietGuide.ThirdParty.csproj", "{CA32A720-AB50-4C7A-A5C3-C2BB01297722}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{798A429E-69FD-4E69-B37B-AC37F7215FF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{798A429E-69FD-4E69-B37B-AC37F7215FF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{798A429E-69FD-4E69-B37B-AC37F7215FF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA32A720-AB50-4C7A-A5C3-C2BB01297722}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA32A720-AB50-4C7A-A5C3-C2BB01297722}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA32A720-AB50-4C7A-A5C3-C2BB01297722}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA32A720-AB50-4C7A-A5C3-C2BB01297722}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
