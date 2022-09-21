@@ -13,8 +13,10 @@ public class SpoonacularApiClient
 
     private const string GetRecipeSearchResultsRoute = "recipes/complexSearch";
     private const string GetRecipeInformationRoute = "recipes/{id}/information";
-    private const string GetRecipeIngredientsRoute = "recipes/findByIngredients";
-    private const string GetRecipeNutrientsRoute = "recipes/findByNutrients";
+    private const string GetRecipeIngredientsRoute = "recipes/{id}/ingredientWidget.json";
+    private const string GetRecipeNutrientsRoute = "recipes/{id}/nutritionWidget.json";
+    private const string GetRecipeIngredientsFindByRoute = "recipes/findByIngredients";
+    private const string GetRecipeNutrientsFindByRoute = "recipes/findByNutrients";
 
     #endregion
     
@@ -44,21 +46,45 @@ public class SpoonacularApiClient
         var response = await _client.ExecuteAsync<RecipeInformation>(request);
         return response.IsSuccessful ? response.Data : null;
     }
-
-    public async Task<RecipeIngredients> GetRecipeIngredients(string ingredients)
+    
+    public async Task<RecipeIngredients> GetRecipeIngredients(int id)
     {
         var request = new RestRequest(GetRecipeIngredientsRoute);
         request.AddHeader("x-api-key", _apiKey);
-        request.AddUrlSegment("ingredients", ingredients);
+        request.AddUrlSegment("id", id.ToString());
         var response = await _client.ExecuteAsync<RecipeIngredients>(request);
         return response.IsSuccessful ? response.Data : null;
     }
     
-    public async Task<RecipeNutrition> GetRecipeNutrients(string nutrients)
+    public async Task<RecipeNutrition> GetRecipeNutrients(int id)
     {
         var request = new RestRequest(GetRecipeNutrientsRoute);
         request.AddHeader("x-api-key", _apiKey);
-        request.AddUrlSegment("nutrients", nutrients);
+        request.AddUrlSegment("id", id.ToString());
+        var response = await _client.ExecuteAsync<RecipeNutrition>(request);
+        return response.IsSuccessful ? response.Data : null;
+    }
+
+    public async Task<RecipeIngredients> SearchRecipesByIngredients(Dictionary<string, string> queryParameters)
+    {
+        var request = new RestRequest(GetRecipeIngredientsFindByRoute);
+        request.AddHeader("x-api-key", _apiKey);
+        foreach (var queryParameter in queryParameters)
+        {
+            request.AddQueryParameter(queryParameter.Key, queryParameter.Value);
+        }
+        var response = await _client.ExecuteAsync<RecipeIngredients>(request);
+        return response.IsSuccessful ? response.Data : null;
+    }
+    
+    public async Task<RecipeNutrition> SearchRecipesByNutrients(Dictionary<string, string> queryParameters)
+    {
+        var request = new RestRequest(GetRecipeNutrientsFindByRoute);
+        request.AddHeader("x-api-key", _apiKey);
+        foreach (var queryParameter in queryParameters)
+        {
+            request.AddQueryParameter(queryParameter.Key, queryParameter.Value);
+        }
         var response = await _client.ExecuteAsync<RecipeNutrition>(request);
         return response.IsSuccessful ? response.Data : null;
     }
