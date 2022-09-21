@@ -26,7 +26,7 @@ public class SpoonacularApiClient
         _client = new RestClient(_baseUrl);
     }
 
-    public async Task<RecipeSearchResults> GetRecipeSearchResults(Dictionary<string, string> queryParameters)
+    public async Task<RecipeSearchResults> SearchRecipes(Dictionary<string, string> queryParameters)
     {
         var request = new RestRequest(GetRecipeSearchResultsRoute);
         request.AddHeader("x-api-key", _apiKey);
@@ -65,7 +65,7 @@ public class SpoonacularApiClient
         return response.IsSuccessful ? response.Data : null;
     }
 
-    public async Task<RecipeIngredients> SearchRecipesByIngredients(Dictionary<string, string> queryParameters)
+    public async Task<RecipeSearchResults> SearchRecipesByIngredients(Dictionary<string, string> queryParameters)
     {
         var request = new RestRequest(GetRecipeIngredientsFindByRoute);
         request.AddHeader("x-api-key", _apiKey);
@@ -73,11 +73,11 @@ public class SpoonacularApiClient
         {
             request.AddQueryParameter(queryParameter.Key, queryParameter.Value);
         }
-        var response = await _client.ExecuteAsync<RecipeIngredients>(request);
+        var response = await _client.ExecuteAsync<RecipeSearchResults>(request);
         return response.IsSuccessful ? response.Data : null;
     }
     
-    public async Task<RecipeNutrition> SearchRecipesByNutrients(Dictionary<string, string> queryParameters)
+    public async Task<RecipeSearchResults> SearchRecipesByNutrients(Dictionary<string, string> queryParameters)
     {
         var request = new RestRequest(GetRecipeNutrientsFindByRoute);
         request.AddHeader("x-api-key", _apiKey);
@@ -85,7 +85,7 @@ public class SpoonacularApiClient
         {
             request.AddQueryParameter(queryParameter.Key, queryParameter.Value);
         }
-        var response = await _client.ExecuteAsync<RecipeNutrition>(request);
+        var response = await _client.ExecuteAsync<RecipeSearchResults>(request);
         return response.IsSuccessful ? response.Data : null;
     }
 }
