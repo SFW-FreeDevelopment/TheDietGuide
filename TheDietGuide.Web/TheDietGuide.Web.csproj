@@ -12,6 +12,8 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0-rc.1.22426.10" />
+        <PackageReference Include="RestSharp" Version="108.0.3-alpha.0.4" />
     </ItemGroup>
 
     <ItemGroup>
