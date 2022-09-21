@@ -54,11 +54,11 @@ public class SpoonacularApiClient
         return response.IsSuccessful ? response.Data : null;
     }
     
-    public async Task<RecipeNutrition> GetRecipeNutrients(string ingredients)
+    public async Task<RecipeNutrition> GetRecipeNutrients(string nutrients)
     {
         var request = new RestRequest(GetRecipeNutrientsRoute);
         request.AddHeader("x-api-key", _apiKey);
-        request.AddUrlSegment("ingredients", ingredients);
+        request.AddUrlSegment("nutrients", nutrients);
         var response = await _client.ExecuteAsync<RecipeNutrition>(request);
         return response.IsSuccessful ? response.Data : null;
     }
