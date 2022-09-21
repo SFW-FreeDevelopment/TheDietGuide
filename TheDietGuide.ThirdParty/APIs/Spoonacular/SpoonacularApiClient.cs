@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using RestSharp;
+using TheDietGuide.ThirdParty.APIs.Spoonacular.Models;
 
-namespace TheDietGuide.ThirdParty.APIs.Spoonacular.Models;
+namespace TheDietGuide.ThirdParty.APIs.Spoonacular;
 
 public class SpoonacularApiClient
 {
