@@ -1,8 +1,15 @@
+using RestSharp;
+using TheDietGuide.ThirdParty.APIs.Spoonacular;
+using TheDietGuide.Web.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped(_ => new RestClient("https://api.spoonacular.com/"));
+builder.Services.AddScoped<SpoonacularApiClient>();
+builder.Services.AddScoped<RecipeService>();
 
 var app = builder.Build();
 

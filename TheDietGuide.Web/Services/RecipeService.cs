@@ -12,9 +12,9 @@ public class RecipeService
         _spoonacularApiClient = spoonacularApiClient;
     }
 
-    public async Task<RecipeSearchResults> SearchRecipes(Dictionary<string, string> queryParameters)
+    public async Task<RecipeSearch> SearchRecipes(string queryParameter)
     {
-        return await _spoonacularApiClient.SearchRecipes(queryParameters);
+        return await _spoonacularApiClient.SearchRecipes(queryParameter);
     }
     
     public async Task<RecipeInformation> GetRecipeInformation(int id)
@@ -32,12 +32,12 @@ public class RecipeService
         return await _spoonacularApiClient.GetRecipeNutrients(id);
     }
     
-    public async Task<RecipeSearchResults> SearchRecipesByIngredients(Dictionary<string, string> queryParameters)
+    public async Task<List<RecipeSearchByIngredientsResults>> SearchRecipesByIngredients(Dictionary<string, string> queryParameters)
     {
         return await _spoonacularApiClient.SearchRecipesByIngredients(queryParameters);
     }
     
-    public async Task<RecipeSearchResults> SearchRecipesByNutrients(Dictionary<string, string> queryParameters)
+    public async Task<List<RecipeSearchByNutrients>> SearchRecipesByNutrients(Dictionary<string, string> queryParameters)
     {
         return await _spoonacularApiClient.SearchRecipesByNutrients(queryParameters);
     }

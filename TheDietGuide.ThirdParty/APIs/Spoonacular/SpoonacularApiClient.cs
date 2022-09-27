@@ -21,21 +21,18 @@ public class SpoonacularApiClient
 
     #endregion
     
-    public SpoonacularApiClient(IConfiguration configuration)
+    public SpoonacularApiClient(IConfiguration configuration, RestClient restClient)
     {
         _apiKey = configuration["SpoonacularApiKey"];
-        _client = new RestClient(_baseUrl);
+        _client = restClient;
     }
 
-    public async Task<RecipeSearchResults> SearchRecipes(Dictionary<string, string> queryParameters)
+    public async Task<RecipeSearch> SearchRecipes(string queryParameter)
     {
         var request = new RestRequest(GetRecipeSearchResultsRoute);
         request.AddHeader("x-api-key", _apiKey);
-        foreach (var queryParameter in queryParameters)
-        {
-            request.AddQueryParameter(queryParameter.Key, queryParameter.Value);
-        }
-        var response = await _client.ExecuteAsync<RecipeSearchResults>(request);
+        request.AddUrlSegment("id", queryParameter);
+        var response = await _client.ExecuteAsync<RecipeSearch>(request);
         return response.IsSuccessful ? response.Data : null;
     }
     
@@ -66,7 +63,7 @@ public class SpoonacularApiClient
         return response.IsSuccessful ? response.Data : null;
     }
 
-    public async Task<RecipeSearchResults> SearchRecipesByIngredients(Dictionary<string, string> queryParameters)
+    public async Task<List<RecipeSearchByIngredientsResults>> SearchRecipesByIngredients(Dictionary<string, string> queryParameters)
     {
         var request = new RestRequest(GetRecipeIngredientsFindByRoute);
         request.AddHeader("x-api-key", _apiKey);
@@ -74,11 +71,11 @@ public class SpoonacularApiClient
         {
             request.AddQueryParameter(queryParameter.Key, queryParameter.Value);
         }
-        var response = await _client.ExecuteAsync<RecipeSearchResults>(request);
+        var response = await _client.ExecuteAsync<List<RecipeSearchByIngredientsResults>>(request);
         return response.IsSuccessful ? response.Data : null;
     }
     
-    public async Task<RecipeSearchResults> SearchRecipesByNutrients(Dictionary<string, string> queryParameters)
+    public async Task<List<RecipeSearchByNutrients>> SearchRecipesByNutrients(Dictionary<string, string> queryParameters)
     {
         var request = new RestRequest(GetRecipeNutrientsFindByRoute);
         request.AddHeader("x-api-key", _apiKey);
@@ -86,7 +83,7 @@ public class SpoonacularApiClient
         {
             request.AddQueryParameter(queryParameter.Key, queryParameter.Value);
         }
-        var response = await _client.ExecuteAsync<RecipeSearchResults>(request);
+        var response = await _client.ExecuteAsync<List<RecipeSearchByNutrients>>(request);
         return response.IsSuccessful ? response.Data : null;
     }
 }
