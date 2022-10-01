@@ -2,7 +2,8 @@
 
 namespace TheDietGuide.ThirdParty.APIs.Spoonacular.Models;
 
-public class RecipeSearchResults
+// Root myDeserializedClass = JsonSerializer.Deserialize<Root>(myJsonResponse);
+public class RecipeSearch
 {
     [JsonPropertyName("results")]
     public List<Result> Results { get; set; }
@@ -17,7 +18,6 @@ public class RecipeSearchResults
     public int TotalResults { get; set; }
 }
 
-// Root myDeserializedClass = JsonSerializer.Deserialize<Root>(myJsonResponse);
 public class Result
 {
     [JsonPropertyName("id")]
@@ -32,4 +32,6 @@ public class Result
     [JsonPropertyName("imageType")]
     public string ImageType { get; set; }
 }
+
+
 
